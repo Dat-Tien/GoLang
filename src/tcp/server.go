@@ -20,6 +20,7 @@ func main() {
 		log.Fatal(err)
 		os.Exit(1)
 	}
+
 	// close listener
 	defer listen.Close()
 	for {
@@ -42,9 +43,8 @@ func handleRequest(conn net.Conn) {
 
 	// write data to response
 	time := time.Now().Format(time.ANSIC)
-	responseStr := fmt.Sprintf("Your message is: %v. Received time: %v", string(buffer[:]), time)
+	responseStr := fmt.Sprintf("Your message is: %v. Received time: %v\n", string(buffer[:]), time)
 	conn.Write([]byte(responseStr))
 
-	// close conn
 	conn.Close()
 }
